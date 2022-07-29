@@ -1,6 +1,6 @@
 # Gift-Card-API
 
-A RESTful Gitf Card API in JSON format with these calls: <br />
+A RESTful Gift Card API in JSON format with these calls: <br />
 • Get all gift cards <br />
 • Get gift card by store <br />
 • Get gift card by ID <br />
