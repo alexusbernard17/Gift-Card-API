@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swagger UI - Gift Card API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css">
+</head>
+<body>
+    <div id="swagger-ui"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.min.js"></script>
+    <script>
+        window.onload = function() {
+            const ui = SwaggerUIBundle({
+                spec: {
+                    "openapi": "3.0.0",
+                    "info": {
+                        "title": "Gift Card API",
+                        "version": "1.0.0",
+                        "description": "API for managing gift cards"
+                    },
+                    "servers": [
+                        {
+                            "url": "http://localhost:5138",
+                            "description": "Local server"
+                        }
+                    ],
+                    "paths": {
+                        "/GiftCard/giftcards": {
+                            "get": {
+                                "summary": "Get all gift cards",
+                                "parameters": [
+                                    {
+                                        "name": "store",
+                                        "in": "query",
+                                        "required": false,
+                                        "schema": { "type": "string" }
+                                    }
+                                ],
+                                "responses": { "200": { "description": "Successful operation" } }
+                            }
+                        },
+                        "/GiftCard/giftcards/store": {
+                            "get": {
+                                "summary": "Get gift card by store",
+                                "parameters": [
+                                    {
+                                        "name": "store",
+                                        "in": "query",
+                                        "required": true,
+                                        "schema": { "type": "string" }
+                                    }
+                                ],
+                                "responses": { "200": { "description": "Successful operation" } }
+                            }
+                        },
+                        "/GiftCard/{id}": {
+                            "get": {
+                                "summary": "Get gift card by ID",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "responses": { "200": { "description": "Successful operation" } }
+                            },
+                            "delete": {
+                                "summary": "Delete gift card by ID",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "responses": { "200": { "description": "Gift card deleted successfully" } }
+                            }
+                        },
+                        "/GiftCard": {
+                            "post": {
+                                "summary": "Create new gift card",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": { "type": "integer" },
+                                                    "value": { "type": "integer" },
+                                                    "store": { "type": "string" },
+                                                    "expiryDate": { "type": "string", "format": "date-time" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": { "201": { "description": "Gift card created successfully" } }
+                            }
+                        },
+                        "/GiftCard/add/{id}": {
+                            "patch": {
+                                "summary": "Add value to gift card",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "add": { "type": "integer" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": { "200": { "description": "Value added successfully" } }
+                            }
+                        },
+                        "/GiftCard/subtract/{id}": {
+                            "patch": {
+                                "summary": "Subtract value from gift card",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "subtract": { "type": "integer" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": { "200": { "description": "Value subtracted successfully" } }
+                            }
+                        },
+                        "/GiftCard/change/{id}": {
+                            "patch": {
+                                "summary": "Change value of gift card",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "change": { "type": "integer" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": { "200": { "description": "Value changed successfully" } }
+                            }
+                        },
+                        "/GiftCard/remove/{id}": {
+                            "patch": {
+                                "summary": "Remove value from gift card",
+                                "parameters": [
+                                    {
+                                        "name": "id",
+                                        "in": "path",
+                                        "required": true,
+                                        "schema": { "type": "integer" }
+                                    }
+                                ],
+                                "responses": { "200": { "description": "Value removed successfully" } }
+                            }
+                        }
+                    }
+                },
+                dom_id: '#swagger-ui',
+            });
+        };
+    </script>
+</body>
+</html>
