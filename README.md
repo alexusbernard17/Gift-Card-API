@@ -11,4 +11,4 @@ A RESTful Gift Card API in JSON format with these calls: <br />
 • Change value of gift card <br />
 • Remove value of gift card <br />
 <br />
-A postman collection file is also provided
+A Swagger UI and a Postman JSON Collection file is also provided
